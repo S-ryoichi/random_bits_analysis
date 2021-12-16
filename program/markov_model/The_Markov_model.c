@@ -1,13 +1,13 @@
 #include<stdio.h>
 #include<string.h>
 
-#define F_READ "../data/rand01_out.txt"
-#define F_WRITE "../markov_result.txt"
+// #define F_READ "../data/rand01_out.txt"
+// #define F_WRITE "../markov_result.txt"
 
 #define BITS 2
 #define VERIFY_COUNT 1024*1000
 
-int main(void){
+int main(int argc, char *argv[]){
     FILE *fp1, *fp2;
     char str;
     char tmp[2];
@@ -18,7 +18,12 @@ int main(void){
     int i = 0;
     int now, next;
 
-    fp1 = fopen(F_READ, "r");
+    if (argc < 2){
+        puts("error");
+        return -1;
+    }
+
+    fp1 = fopen(argv[1], "r");
     if(fp1 == NULL){
         printf("read file can't open.\n");
         return -1;
@@ -42,14 +47,14 @@ int main(void){
     fclose(fp1);
 
     // output to "result.txt"
-    fp2 = fopen(F_WRITE, "w");
+    fp2 = fopen(argv[2], "w");
     if(fp2 == NULL){
         printf("write file can't open.\n");
         return -1;
     }
 
     fprintf(fp2, "result\n");
-    fprintf(fp2, "input file is %s\n", F_READ);
+    fprintf(fp2, "input file is %s\n", argv[1]);
     for (i = 0; i < 4; i++){
         fprintf(fp2, "\n----------state \"%s\"----------\n\n", state[i]);
         fprintf(fp2, "total : %d\n", state_total[i]);

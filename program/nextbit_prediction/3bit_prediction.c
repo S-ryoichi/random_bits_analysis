@@ -27,7 +27,7 @@ int read(unsigned int state_count[ARRAY_SIZE][PATTERN], unsigned int state_total
     unsigned int tmp = 0;
     int now, next;
 
-    fpr = fopen(F_READ, "r");
+    fpr = fopen(argv[1], "r");
     if(fpr == NULL){
         printf("file can't open.\n");
         return -1;
@@ -52,7 +52,7 @@ int read(unsigned int state_count[ARRAY_SIZE][PATTERN], unsigned int state_total
     return 0;
 }
 
-int main(void){
+int main(int argc, char *argv[]){
     //struct Data data[0];
     //struct Data data[1];
     //struct Data data[2];
@@ -65,15 +65,19 @@ int main(void){
     int i = 0;
 
     if (read(state_count, state_total, count_sum) == -1) return -1;
+    if (argc < 2){
+        puts("error");
+        return -1;
+    }
 
-    fpw = fopen(F_WRITE, "w");
+    fpw = fopen(argv[2], "w");
     if(fpw == NULL){
         printf("file can't open.\n");
         return -1;
     }
 
     fprintf(fpw, "result\n");
-    fprintf(fpw, "input file is %s\n", F_READ);
+    fprintf(fpw, "input file is %s\n", argv[1]);
     for (i = 0; i < ARRAY_SIZE; i++){
         fprintf(fpw, "\n----------state \"%5d\"----------\n\n", i);
         fprintf(fpw, "total : %d\n", state_total[i]);

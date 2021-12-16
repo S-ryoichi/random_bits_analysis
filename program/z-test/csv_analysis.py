@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import seaborn as sns
+# import seaborn as sns
 from scipy import stats
 import math
 
@@ -72,85 +72,59 @@ def plot_hist(f):
     plt.close("all")
 
 
-def plot_hist_sns(f):
-    plt.figure()
-    sns.distplot(f["0000"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"00\"')
-    sns.distplot(f["0001"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"01\"')
-    sns.distplot(f["0010"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"10\"')
-    sns.distplot(f["0011"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"11\"')
-    plt.xlabel("Probability")
-    plt.ylabel("Number of data")
-    plt.legend()
-    plt.savefig("./../state_transition_00.png")
+# def plot_hist_sns(f):
+#     plt.figure()
+#     sns.distplot(f["0000"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"00\"')
+#     sns.distplot(f["0001"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"01\"')
+#     sns.distplot(f["0010"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"10\"')
+#     sns.distplot(f["0011"], bins=30, norm_hist=True, kde=True, label='\"00\"->\"11\"')
+#     plt.xlabel("Probability")
+#     plt.ylabel("Number of data")
+#     plt.legend()
+#     plt.savefig("./../state_transition_00.png")
     
-    plt.figure()
-    sns.distplot(f["0100"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"00\"')
-    sns.distplot(f["0101"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"01\"')
-    sns.distplot(f["0110"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"10\"')
-    sns.distplot(f["0111"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"11\"')
-    plt.xlabel("Probability")
-    plt.ylabel("Number of data")
-    plt.legend()
-    plt.savefig("./../state_transition_01.png")
+#     plt.figure()
+#     sns.distplot(f["0100"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"00\"')
+#     sns.distplot(f["0101"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"01\"')
+#     sns.distplot(f["0110"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"10\"')
+#     sns.distplot(f["0111"], bins=30, norm_hist=True, kde=True, label='\"01\"->\"11\"')
+#     plt.xlabel("Probability")
+#     plt.ylabel("Number of data")
+#     plt.legend()
+#     plt.savefig("./../state_transition_01.png")
     
-    plt.figure()
-    sns.distplot(f["1000"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"00\"')
-    sns.distplot(f["1001"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"01\"')
-    sns.distplot(f["1010"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"10\"')
-    sns.distplot(f["1011"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"11\"')
-    plt.xlabel("Probability")
-    plt.ylabel("Number of data")
-    plt.legend()
-    plt.savefig("./../state_transition_10.png")
+#     plt.figure()
+#     sns.distplot(f["1000"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"00\"')
+#     sns.distplot(f["1001"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"01\"')
+#     sns.distplot(f["1010"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"10\"')
+#     sns.distplot(f["1011"], bins=30, norm_hist=True, kde=True, label='\"10\"->\"11\"')
+#     plt.xlabel("Probability")
+#     plt.ylabel("Number of data")
+#     plt.legend()
+#     plt.savefig("./../state_transition_10.png")
     
-    plt.figure()
-    sns.distplot(f["1100"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"00\"')
-    sns.distplot(f["1101"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"01\"')
-    sns.distplot(f["1110"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"10\"')
-    sns.distplot(f["1111"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"11\"')
-    plt.xlabel("Probability")
-    plt.ylabel("Number of data")
-    plt.legend()
-    plt.savefig("./../state_transition_11.png")
+#     plt.figure()
+#     sns.distplot(f["1100"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"00\"')
+#     sns.distplot(f["1101"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"01\"')
+#     sns.distplot(f["1110"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"10\"')
+#     sns.distplot(f["1111"], bins=30, norm_hist=True, kde=True, label='\"11\"->\"11\"')
+#     plt.xlabel("Probability")
+#     plt.ylabel("Number of data")
+#     plt.legend()
+#     plt.savefig("./../state_transition_11.png")
 
 
 def analysis(f):
-    # print(f.describe())
     f_ave = f.mean()
     f_var = f.var()
     f_std = f.std()
 
     db00 = DB("state 00", f_ave[1], f_var[1], f_std[1])
-    # print("{}".format(db00.get_label()))
-    # print("mean: {:.6f}".format(db00.get_mean()))
-    # print("var: {:.6f}".format(db00.get_var()))
-    # print("std: {:.6f}".format(db00.get_std()))
-    # print("z: {:.6f}".format(db00.get_z()))
-    # print("p-value: {:.6f}".format(db00.get_p()))
 
     db01 = DB("state 01", f_ave[2], f_var[2], f_std[2])
-    # print("{}".format(db01.get_label()))
-    # print("mean: {:.6f}".format(db01.get_mean()))
-    # print("var: {:.6f}".format(db01.get_var()))
-    # print("std: {:.6f}".format(db01.get_std()))
-    # print("z: {:.6f}".format(db01.get_z()))
-    # print("p-value: {:.6f}".format(db01.get_p()))
-
     db10 = DB("state 10", f_ave[3], f_var[3], f_std[3])
-    # print("{}".format(db10.get_label()))
-    # print("mean: {:.6f}".format(db10.get_mean()))
-    # print("var: {:.6f}".format(db10.get_var()))
-    # print("std: {:.6f}".format(db10.get_std()))
-    # print("z: {:.6f}".format(db10.get_z()))
-    # print("p-value: {:.6f}".format(db10.get_p()))
 
     db11 = DB("state 11", f_ave[4], f_var[4], f_std[4])
-    # print("{}".format(db11.get_label()))
-    # print("mean: {:.6f}".format(db11.get_mean()))
-    # print("var: {:.6f}".format(db11.get_var()))
-    # print("std: {:.6f}".format(db11.get_std()))
-    # print("z: {:.6f}".format(db11.get_z()))
-    # print("p-value: {:.6f}".format(db11.get_p()))
 
     for c in range(16):
         globals()["db_%s" % c] = DB("{:04b}".format(c), f_ave[5 + c], f_var[5 + c], f_std[5 + c])
@@ -184,17 +158,16 @@ def analysis(f):
 
 def main():
     f = pd.read_csv(sys.argv[1], sep=",")
-    # print(f.head(3))
-    # print(f.tail(3))
 
+    # z-test
     analysis(f)
-    plot_hist_sns(f)
+
+    # histgram
+    # plot_hist_sns(f)
     # plot_hist(f)
 
 
 
 if __name__ == "__main__":
-    # plt.style.use('seaborn-darkgrid') 
-    sns.set()
-    # sns.set(style="darkgrid")
+    # sns.set()
     main()

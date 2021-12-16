@@ -1,17 +1,17 @@
 #include<stdio.h>
 #include<string.h>
 
-#define F_READ "../data/rand01_out.txt"
-#define F_WRITE "../markov_result.csv"
+// #define F_READ "../data/rand01_out.txt"
+// #define F_WRITE "../markov_result.csv"
 
 #define BITS 2
-#define SEQUENCE 1024
-#define COUNT 1001
+#define SEQUENCE 1000
+#define COUNT 1000
 #define VERIFY_COUNT SEQUENCE*COUNT
 
 
 
-int main(void){
+int main(int argc, char *argv[]){
     FILE *fp1, *fp2;
     char str;
     char tmp[2];
@@ -25,15 +25,20 @@ int main(void){
     int i = 0, j = 0;
     int now, next;
 
+    if (argc < 2){
+        puts("error");
+        return -1;
+    }
+
     // input from "rand01_out.txt"
-    fp1 = fopen(F_READ, "r");
+    fp1 = fopen(argv[1], "r");
     if(fp1 == NULL){
         printf("read file can't open.\n");
         return -1;
     }
 
     // output to "markov_result.csv"
-    fp2 = fopen(F_WRITE, "w");
+    fp2 = fopen(argv[2], "w");
     if(fp2 == NULL){
         printf("write file can't open.\n");
         return -1;
