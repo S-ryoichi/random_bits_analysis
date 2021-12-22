@@ -12,6 +12,8 @@ gcc -g -o ./exec/markov_csv ./program/z-test/markov_1000.c
 
 for filename in ./bin_ascii_data/*.txt; do
     basefile=$(basename $filename .txt)
+    binfilename=${filename}
+    echo $binfilename
     dirname=./result/${basefile}
     
     mkdir $dirname
