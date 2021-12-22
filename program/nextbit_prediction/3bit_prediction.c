@@ -20,14 +20,14 @@
 //    unsigned int state_total;
 //};
 
-int read(unsigned int state_count[ARRAY_SIZE][PATTERN], unsigned int state_total[], unsigned int count_sum){
+int read(unsigned int state_count[ARRAY_SIZE][PATTERN], unsigned int state_total[], unsigned int count_sum, char *fname){
     FILE *fpr;
     char str;
     // tmp -> {state(BIT_WIDTH[bit]), next_bit(1[bit])}
     unsigned int tmp = 0;
     int now, next;
 
-    fpr = fopen(argv[1], "r");
+    fpr = fopen(fname, "r");
     if(fpr == NULL){
         printf("file can't open.\n");
         return -1;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
     unsigned int count_sum = 0;
     int i = 0;
 
-    if (read(state_count, state_total, count_sum) == -1) return -1;
+    if (read(state_count, state_total, count_sum, argv[1]) == -1) return -1;
     if (argc < 2){
         puts("error");
         return -1;

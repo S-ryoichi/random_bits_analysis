@@ -3,7 +3,7 @@
 // #define F_READ "../data/rand01.txt"
 // #define F_WRITE "../data/rand01_out.txt"
 
-#define MAX 1024 * 1024
+#define MAX 1000 * 1000 * 1000
 
 
 int main(int argc, char *argv[]){

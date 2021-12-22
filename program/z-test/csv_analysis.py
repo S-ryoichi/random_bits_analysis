@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import math
 
-COUNT = 1001
+COUNT = 1000
 MEAN = 0.25
 
 class DB:
@@ -162,7 +162,7 @@ def main():
     # z-test
     analysis(f)
 
-    # histgram
+    ## histgram
     # plot_hist_sns(f)
     # plot_hist(f)
 
