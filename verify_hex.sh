@@ -19,6 +19,7 @@ for filename in ./data/*.txt; do
     
     mkdir $dirname
     mkdir $dirname/markov_csv
+    mkdir ./result/z_test
 
     echo "./exec/arrange_data $filename $binfilename"
     ./exec/arrange_data $filename $binfilename
@@ -36,7 +37,7 @@ for filename in ./data/*.txt; do
     ./exec/markov_csv $binfilename ${dirname}/markov_csv/${basefile}_markov > ./log/${basefile}_markov.log
 
     # for csvfilename in ./
-    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ${dirname}/${basefile}_z_test.csv > ./log/${basefile}_z_test.log
+    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}_z_test.csv
 done
 
 

@@ -12,12 +12,11 @@ gcc -g -o ./exec/markov_csv ./program/z-test/markov_1000.c
 
 for filename in ./bin_ascii_data/*.txt; do
     basefile=$(basename $filename .txt)
-    binfilename=${filename}
-    echo $binfilename
     dirname=./result/${basefile}
     
     mkdir $dirname
     mkdir $dirname/markov_csv
+    mkdir ./result/z_test
 
     echo "./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt"
     ./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt > ./log/${basefile}_markov.log
@@ -32,7 +31,7 @@ for filename in ./bin_ascii_data/*.txt; do
     ./exec/markov_csv $binfilename ${dirname}/markov_csv/${basefile}_markov > ./log/${basefile}_markov.log
 
     # for csvfilename in ./
-    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ${dirname}/${basefile}_z_test.csv > ./log/${basefile}_z_test.log
+    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}_z_test.csv
 done
 
 
