@@ -40,6 +40,8 @@ for filename in ./data/*.txt; do
     python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}_z_test.csv
 done
 
+python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z_test_result.csv > ./result/z_test/z-test_result.txt
+
 
 
 ###############
