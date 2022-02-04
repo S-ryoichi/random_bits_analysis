@@ -32,7 +32,7 @@ for filename in ./bin_ascii_data/*.txt; do
     ./exec/markov_csv $binfilename ${dirname}/markov_csv/${basefile}_markov > ./log/${basefile}_markov.log
 
     # for csvfilename in ./
-    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}_z_test.csv
+    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}.csv
 done
 
 python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z-test_result.csv
