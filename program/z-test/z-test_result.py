@@ -1,13 +1,11 @@
+from fileinput import filename
 import os
 import sys
 import pandas as pd
 
-csv_file = os.listdir(sys.argv[1])
+file_name = os.listdir(sys.argv[1])
+csv_file = [s for s in file_name if ".csv" in s]
 print("f_name is {}".format(csv_file))
-# csv_file.remove(".history")
-# csv_file.remove("z-test_result.py")
-# csv_file.remove("z-test_result.txt")
-# csv_file.remove("z-test_result.csv")
 csv_file_strip = []
 
 def main():
