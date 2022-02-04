@@ -8,6 +8,9 @@ def plot_graph(df, name):
     df.plot(x="label")
     plt.xlabel("The number of ring oscillator circuits")
     plt.ylabel("The number of passing test")
+    plt.subplots_adjust(bottom=0.2)
+    plt.xticks([num for num in range(25)], df["label"].to_list(), rotation=45)
+    # plt.xticks([num for num in range(25)], [num for num in range(1, 26)], rotation=45)
     plt.savefig(sys.argv[2] + name)
     plt.close("all")
 
