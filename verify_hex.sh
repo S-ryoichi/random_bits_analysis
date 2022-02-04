@@ -43,4 +43,5 @@ done
 python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z_test_result.csv
 
 # fot the testing RO circuit
-# python3 ./program/z-test/graph.py ./result/z_test_result.csv
+# mkdir ./result/image
+# python3 ./program/z-test/graph.py ./result/z_test_result.csv ./result/image/
