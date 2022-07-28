@@ -14,6 +14,7 @@ def main():
         print(f_name)
         f_data = pd.read_csv(sys.argv[1] + str(f_name), engine="python")
         f_booldata = (f_data >= 0.005)
+        # 確率誤差の条件
         print(f_booldata.sum())
         writecsv.append(f_booldata.sum())
         print("")
