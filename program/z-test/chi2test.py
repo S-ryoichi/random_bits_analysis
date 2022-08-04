@@ -1,6 +1,7 @@
 import os
 import sys
 import pandas as pd
+from scipy.special import gammainc
 
 file_name = os.listdir(sys.argv[1])
 csv_file = [s for s in file_name if ".csv" in s]
@@ -10,17 +11,22 @@ csv_file_strip = []
 class Data:
     def __init__(self):
         self.index = ""
+        self.sum = 0
         self.distribute = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     def set_index(self, name):
         self.index = name
     def increment(self, area):
         self.distribute[area] = self.distribute[area] + 1
+        self.sum = self.sum + 1
     def get_index(self):
         return self.index
     def get_dist(self):
         return self.distribute
+    def get_sum(self):
+        return self.sum
     def __del__(self):
         self.index = ""
+        self.sum = 0
         self.distribute = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 def insert(data, num):
@@ -49,6 +55,16 @@ def insert(data, num):
         print("error")
         exit(-1)
 
+def chi2_test(data):
+    chi2 = 0
+    separate_data = data.get_dist()
+    separate_mean = 10 / data.get_sum()
+    for val in separate_data:
+        chi2 = chi2 + (((val - separate_mean) ** 2) / separate_mean)
+    p_val = gammainc((9 / 2), (chi2 / 2))
+    return [p_val]
+    # return float(p_val)
+
 def main():
     writecsv = []
     linedata = []
@@ -60,16 +76,15 @@ def main():
             data = Data()
             data.set_index(index)
             for n, d in enumerate(row):
-                # print(n, d * 2.0)
                 insert(data, (d * 2.0))
-            # print(data.get_index())
-            # print(data.get_dist())
-            linedata = [data.get_index()] + data.get_dist()
+            linedata = [data.get_index()] + data.get_dist() + chi2_test(data)
             writecsv.append(linedata)
             linedata = []
             del data
-        fw_data = pd.DataFrame(writecsv, columns=["", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10"])
-        fw_data.to_csv(sys.argv[2] + "out_" + str(f_name), index=False)
+        df_chi2 = pd.DataFrame(writecsv, columns=["label", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "p-value"])
+        df_chi2 = df_chi2.set_index("label")
+        fw_data = df_chi2
+        fw_data.to_csv(sys.argv[2] + "out_" + str(f_name))
 
 if __name__ == "__main__":
-    main()    
+    main() 

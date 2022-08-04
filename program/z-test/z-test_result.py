@@ -26,4 +26,4 @@ def main():
     fw.to_csv(sys.argv[2])
 
 if __name__ == "__main__":
-    main()    
+    main()

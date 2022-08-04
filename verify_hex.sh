@@ -20,6 +20,7 @@ for filename in ./data/*.txt; do
     mkdir $dirname
     mkdir $dirname/markov_csv
     mkdir ./result/z_test
+    mkdir ./result/chi2test
 
     echo "./exec/arrange_data $filename $binfilename"
     ./exec/arrange_data $filename $binfilename
@@ -45,3 +46,6 @@ python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z_test_resul
 ## fot the testing RO circuit
 mkdir ./result/image
 python3 ./program/z-test/graph.py ./result/z_test_result.csv ./result/image/
+
+#
+python3 ./program/z-test/chi2test.py ./result/z_test/ ./result/chi2test/
