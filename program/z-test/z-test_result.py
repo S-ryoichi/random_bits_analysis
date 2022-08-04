@@ -2,6 +2,7 @@ from fileinput import filename
 import os
 import sys
 import pandas as pd
+import tqdm
 
 file_name = os.listdir(sys.argv[1])
 csv_file = [s for s in file_name if ".csv" in s]
@@ -10,7 +11,8 @@ csv_file_strip = []
 
 def main():
     writecsv = []
-    for f_name in csv_file:
+
+    for f_name in tqdm.tqdm(csv_file):
         print(f_name)
         f_data = pd.read_csv(sys.argv[1] + str(f_name), engine="python")
         f_booldata = (f_data >= 0.005)

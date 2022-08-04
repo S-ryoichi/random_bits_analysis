@@ -1,7 +1,7 @@
 import os
 import sys
 import pandas as pd
-from scipy.special import gammainc
+from scipy.special import gammainc, gammaincc
 
 file_name = os.listdir(sys.argv[1])
 csv_file = [s for s in file_name if ".csv" in s]
@@ -58,10 +58,12 @@ def insert(data, num):
 def chi2_test(data):
     chi2 = 0
     separate_data = data.get_dist()
-    separate_mean = 10 / data.get_sum()
+    separate_mean = data.get_sum() / 10
+    # print(separate_mean)
     for val in separate_data:
         chi2 = chi2 + (((val - separate_mean) ** 2) / separate_mean)
-    p_val = gammainc((9 / 2), (chi2 / 2))
+        # print(chi2)
+    p_val = gammaincc((9 / 2), (chi2 / 2))
     return [p_val]
     # return float(p_val)
 
@@ -84,7 +86,7 @@ def main():
         df_chi2 = pd.DataFrame(writecsv, columns=["label", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "p-value"])
         df_chi2 = df_chi2.set_index("label")
         fw_data = df_chi2
-        fw_data.to_csv(sys.argv[2] + "out_" + str(f_name))
+        fw_data.to_csv(sys.argv[2] + "chi2test_" + str(f_name))
 
 if __name__ == "__main__":
     main() 

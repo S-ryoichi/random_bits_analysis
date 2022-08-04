@@ -18,6 +18,7 @@ for filename in ./bin_ascii_data/*.txt; do
     mkdir $dirname
     mkdir $dirname/markov_csv
     mkdir ./result/z_test
+    mkdir ./result/chi2test
 
     echo "./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt"
     ./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt > ./log/${basefile}_markov.log
@@ -35,9 +36,12 @@ for filename in ./bin_ascii_data/*.txt; do
     python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}.csv
 done
 
-python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z-test_result.csv
+python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z_test_result.csv
 
 
 # fot the testing RO circuit
 mkdir ./result/image
 python3 ./program/z-test/graph.py ./result/z_test_result.csv ./result/image/
+
+#
+python3 ./program/z-test/chi2test.py ./result/z_test/ ./result/chi2test/
