@@ -1,2 +1,7 @@
 bin_ascii_data/*.txt
 data/*.txt
+.history/
+__pycache__/
+result/
+log/
+exec/
