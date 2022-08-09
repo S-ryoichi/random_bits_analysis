@@ -68,9 +68,9 @@ def chi2_test(data):
     # return float(p_val)
 
 def main():
-    writecsv = []
-    linedata = []
     for f_name in csv_file:
+        linedata = []
+        writecsv = []
         print(f_name)
         fr_data = pd.read_csv(sys.argv[1] + str(f_name), index_col=0, engine="python")
         # 以降修正予定
