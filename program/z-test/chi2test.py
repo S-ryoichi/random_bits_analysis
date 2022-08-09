@@ -30,7 +30,7 @@ class Data:
         self.distribute = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 def insert(data, num):
-    if (num <= 0.1 and num > 0.0):
+    if (num <= 0.1 and num >= 0.0):
         data.increment(0)
     elif (num <= 0.2 and num > 0.1):
         data.increment(1)
