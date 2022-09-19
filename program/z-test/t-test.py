@@ -35,9 +35,10 @@ def get_filename():
 
 def analysis(writedata, csvfilenames):
     for csvfilename in tqdm.tqdm(csvfilenames):
-        # csvfilename = csvfilename
+        csvfilename = csvfilename
         fr = pd.read_csv(csvfilename, sep=",")
         listdata = fr.values.tolist()
+        print(listdata)
         for c in range(16):
             globals()["db_%s" % c] = DB("{:04b}".format(c), listdata[5 + c])
         
