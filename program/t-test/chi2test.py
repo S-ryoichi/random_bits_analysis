@@ -78,7 +78,7 @@ def main():
             data = Data()
             data.set_index(index)
             for n, d in enumerate(row):
-                insert(data, (d * 2.0))
+                insert(data, d)
             linedata = [data.get_index()] + data.get_dist() + chi2_test(data)
             writecsv.append(linedata)
             linedata = []
