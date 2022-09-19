@@ -37,7 +37,6 @@ def analysis(writedata, csvfilenames):
     for csvfilename in tqdm.tqdm(csvfilenames):
         # csvfilename = csvfilename
         fr = pd.read_csv(csvfilename, sep=",")
-        print(fr[5])
         for c in range(16):
             globals()["db_%s" % c] = DB("{:04b}".format(c), pd.Series(fr, index="{:04b}".format(c)))
         
