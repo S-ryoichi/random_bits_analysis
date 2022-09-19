@@ -38,7 +38,7 @@ def analysis(writedata, csvfilenames):
         csvfilename = csvfilename
         fr = pd.read_csv(csvfilename, sep=",")
         listdata = fr.values.tolist()
-        print(len(listdata))
+        print("listsize: " + len(listdata))
         for c in range(16):
             globals()["db_%s" % c] = DB("{:04b}".format(c), listdata[5 + c])
         
