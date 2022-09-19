@@ -43,7 +43,9 @@ python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_resul
 
 # fot the testing RO circuit
 mkdir ./result/image
+echo "python3 ./program/t-test/graph.py ./result/t-test_result.csv ./result/image/"
 python3 ./program/t-test/graph.py ./result/t-test_result.csv ./result/image/
 
 #
+echo "python3 ./program/t-test/chi2test.py ./result/t-test/ ./result/chi2test/"
 python3 ./program/t-test/chi2test.py ./result/t-test/ ./result/chi2test/
