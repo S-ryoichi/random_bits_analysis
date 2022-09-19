@@ -33,9 +33,11 @@ for filename in ./bin_ascii_data/*.txt; do
     ./exec/markov_csv $binfilename ${dirname}/markov_csv/${basefile}_markov > ./log/${basefile}_markov.log
 
     # for csvfilename in ./
+    echo "python3 ./program/t-test/t-test.py ${dirname}/markov_csv/ ./result/t-test/${basefile}.csv"
     python3 ./program/t-test/t-test.py ${dirname}/markov_csv/ ./result/t-test/${basefile}.csv
 done
 
+echo "python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv" 
 python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv
 
 
