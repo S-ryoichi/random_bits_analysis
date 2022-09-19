@@ -39,6 +39,8 @@ def analysis(writedata, csvfilenames):
         fr = pd.read_csv(csvfilename, sep=",")
         for c in range(16):
             data = fr[5 + c].values.tolist()
+            print(len(data))
+            print(data)
             globals()["db_%s" % c] = DB("{:04b}".format(c), data)
         
         writedata.append([db00.get_p(), db01.get_p(), db10.get_p(), db11.get_p(), db_0.get_p(), db_1.get_p(), db_2.get_p(), db_3.get_p(), db_4.get_p(), db_5.get_p(), db_6.get_p(), db_7.get_p(), db_8.get_p(), db_9.get_p(), db_10.get_p(), db_11.get_p(), db_12.get_p(), db_13.get_p(), db_14.get_p(), db_15.get_p()])
