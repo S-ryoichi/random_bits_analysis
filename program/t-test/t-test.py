@@ -38,13 +38,13 @@ def analysis(writedata, csvfilenames):
         csvfilename = csvfilename
         fr = pd.read_csv(csvfilename, sep=",")
 
-        db00 = DB("state 00", fr[1].values.tolist())
-        db01 = DB("state 01", fr[2].values.tolist())
-        db10 = DB("state 10", fr[3].values.tolist())
-        db11 = DB("state 11", fr[4].values.tolist())
+        db00 = DB("state 00", fr["state_00"].values.tolist())
+        db01 = DB("state 01", fr["state_01"].values.tolist())
+        db10 = DB("state 10", fr["state_10"].values.tolist())
+        db11 = DB("state 11", fr["state_11"].values.tolist())
 
         for c in range(16):
-            data = fr[5 + c].values.tolist()
+            data = fr["{:4b}".format(c)].values.tolist()
             print(len(data))
             print(data)
             globals()["db_%s" % c] = DB("{:04b}".format(c), data)
