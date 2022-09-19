@@ -44,7 +44,7 @@ def analysis(writedata, csvfilenames):
         db11 = DB("state 11", fr["state_11"].values.tolist())
 
         for c in range(16):
-            data = fr["{:4b}".format(c)].values.tolist()
+            data = fr["{:04b}".format(c)].values.tolist()
             print(len(data))
             print(data)
             globals()["db_%s" % c] = DB("{:04b}".format(c), data)
