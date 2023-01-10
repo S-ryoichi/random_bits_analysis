@@ -7,8 +7,8 @@ mkdir log
 gcc -o ./exec/markov_veryfy ./program/markov_model/The_Markov_model.c
 gcc -o ./exec/prediction2 ./program/nextbit_prediction/2bit_prediction.c
 gcc -o ./exec/prediction3 ./program/nextbit_prediction/3bit_prediction.c
-gcc -g -o ./exec/markov_csv ./program/z-test/markov_1000.c
-# gcc -o ./exec/markov_csv ./program/z-test/markov.c
+gcc -g -o ./exec/markov_csv ./program/t-test/markov_1000.c
+# gcc -o ./exec/markov_csv ./program/t-test/markov.c
 
 for filename in ./bin_ascii_data/*.txt; do
     basefile=$(basename $filename .txt)
@@ -17,7 +17,7 @@ for filename in ./bin_ascii_data/*.txt; do
     
     mkdir $dirname
     mkdir $dirname/markov_csv
-    mkdir ./result/z_test
+    mkdir ./result/t-test
     mkdir ./result/chi2test
 
     echo "./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt"
@@ -33,15 +33,19 @@ for filename in ./bin_ascii_data/*.txt; do
     ./exec/markov_csv $binfilename ${dirname}/markov_csv/${basefile}_markov > ./log/${basefile}_markov.log
 
     # for csvfilename in ./
-    python3 ./program/z-test/z_test.py ${dirname}/markov_csv/ ./result/z_test/${basefile}.csv
+    echo "python3 ./program/t-test/t-test.py ${dirname}/markov_csv/ ./result/t-test/${basefile}.csv"
+    python3 ./program/t-test/t-test.py ${dirname}/markov_csv/ ./result/t-test/${basefile}.csv
 done
 
-python3 ./program/z-test/z-test_result.py ./result/z_test/ ./result/z_test_result.csv
+echo "python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv" 
+python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv
 
 
 # fot the testing RO circuit
 mkdir ./result/image
-python3 ./program/z-test/graph.py ./result/z_test_result.csv ./result/image/
+echo "python3 ./program/t-test/graph.py ./result/t-test_result.csv ./result/image/"
+python3 ./program/t-test/graph.py ./result/t-test_result.csv ./result/image/
 
 #
-python3 ./program/z-test/chi2test.py ./result/z_test/ ./result/chi2test/
+echo "python3 ./program/t-test/chi2test.py ./result/t-test/ ./result/chi2test/"
+python3 ./program/t-test/chi2test.py ./result/t-test/ ./result/chi2test/
