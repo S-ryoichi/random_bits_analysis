@@ -41,17 +41,17 @@ int main(int argc, char *argv[]){
             case '8': fputs("1000", fp2); count += 4; break;
             case '9': fputs("1001", fp2); count += 4; break;
             case 'A': 
-                 "a": fputs("1010", fp2); count += 4; break;
+            case "a": fputs("1010", fp2); count += 4; break;
             case 'B': 
-                 "b": fputs("1011", fp2); count += 4; break;
+            case "b": fputs("1011", fp2); count += 4; break;
             case 'C': 
-                 "c": fputs("1100", fp2); count += 4; break;
+            case "c": fputs("1100", fp2); count += 4; break;
             case 'D': 
-                 "d": fputs("1101", fp2); count += 4; break;
+            case "d": fputs("1101", fp2); count += 4; break;
             case 'E': 
-                 "e": fputs("1110", fp2); count += 4; break;
+            case "e": fputs("1110", fp2); count += 4; break;
             case 'F': 
-                 "f": fputs("1111", fp2); count += 4; break;
+            case "f": fputs("1111", fp2); count += 4; break;
             default: break;
         }
         if (count >= MAX) break;
