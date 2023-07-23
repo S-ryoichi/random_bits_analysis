@@ -18,19 +18,19 @@ def plot_graph(df, name):
 def main():
     csv_data = pd.read_csv(sys.argv[1], engine="python")
     
-    out = csv_data[["label", "state_00", "state_01", "state_10", "state_11"]]
+    out = csv_data[["label", "P(00)", "P(01)", "P(10)", "P(11)"]]
     plot_graph(out, "freq.png")
     
-    out = csv_data[["label", "00->00", "00->01", "00->10", "00->11"]]
+    out = csv_data[["label", "P(00|00)", "P(01|00)", "P(10|00)", "P(11|00)"]]
     plot_graph(out, "state_trans_00.png")
     
-    out = csv_data[["label", "01->00", "01->01", "01->10", "01->11"]]
+    out = csv_data[["label", "P(00|01)", "P(01|01)", "P(10|01)", "P(11|01)"]]
     plot_graph(out, "state_trans_01.png")
     
-    out = csv_data[["label", "10->00", "10->01", "10->10", "10->11"]]
+    out = csv_data[["label", "P(00|10)", "P(01|10)", "P(10|10)", "P(11|10)"]]
     plot_graph(out, "state_trans_10.png")
     
-    out = csv_data[["label", "11->00", "11->01", "11->10", "11->11"]]
+    out = csv_data[["label", "P(00|11)", "P(01|11)", "P(10|11)", "P(11|11)"]]
     plot_graph(out, "state_trans_11.png")
 
 
