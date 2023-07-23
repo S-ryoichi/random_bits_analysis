@@ -35,22 +35,28 @@ def get_filename():
 
 def analysis(writedata, csvfilenames):
     for csvfilename in tqdm.tqdm(csvfilenames):
-        csvfilename = csvfilename
+        # csvfilename = csvfilename
         fr = pd.read_csv(csvfilename, sep=",")
 
-        db00 = DB("state 00", fr["state_00"].values.tolist())
-        db01 = DB("state 01", fr["state_01"].values.tolist())
-        db10 = DB("state 10", fr["state_10"].values.tolist())
-        db11 = DB("state 11", fr["state_11"].values.tolist())
+        db00 = DB("P(00)", fr["P(00)"].values.tolist())
+        db01 = DB("P(01)", fr["P(01)"].values.tolist())
+        db10 = DB("P(10)", fr["P(10)"].values.tolist())
+        db11 = DB("P(11)", fr["P(11)"].values.tolist())
 
-        for c in range(16):
-            data = fr["{:04b}".format(c)].values.tolist()
-            globals()["db_%s" % c] = DB("{:04b}".format(c), data)
+        # create the label "P(xx)" and "P(xx|yy)"
+        db_label_list = []
+        for count in range(4):
+            db_label_list.append("P({:02b})".format(c))
+        for count in range(16):
+            count_strbin = "{:04b}".format(c)
+            db_label_list.append("P({}|{}})".format(count_strbin[2:4], count_strbin[0:2]))
         
-        writedata.append([db00.get_p(), db01.get_p(), db10.get_p(), db11.get_p(), db_0.get_p(), db_1.get_p(), db_2.get_p(), db_3.get_p(), db_4.get_p(), db_5.get_p(), db_6.get_p(), db_7.get_p(), db_8.get_p(), db_9.get_p(), db_10.get_p(), db_11.get_p(), db_12.get_p(), db_13.get_p(), db_14.get_p(), db_15.get_p()])
+        db_list = [DB(label, fr[label].values.tolist()) for label in db_label_list]
+        p_val_list = [db.get_p() for db in db_list]
+
+        writedata.append(p_val_list)
         # writedata.append([db00.get_p(), db01.get_p(), db10.get_p(), db11.get_p(), db_0.get_p(), db_1.get_p(), db_2.get_p(), db_3.get_p(), db_4.get_p(), db_5.get_p(), db_6.get_p(), db_7.get_p(), db_8.get_p(), db_9.get_p(), db_10.get_p(), db_11.get_p(), db_12.get_p(), db_13.get_p(), db_14.get_p(), db_15.get_p()])
 
-        # print("End the test of " + csvfilename + "file.")
     return writedata
 
 def main():
@@ -60,7 +66,7 @@ def main():
 
     writedata = analysis(writedata, csvfilenames)
     
-    fw = pd.DataFrame(writedata, columns=["state_00", "state_01", "state_10", "state_11", "00->00", "00->01", "00->10", "00->11", "01->00", "01->01", "01->10", "01->11", "10->00", "10->01", "10->10", "10->11", "11->00", "11->01", "11->10", "11->11"])
+    fw = pd.DataFrame(writedata, columns=["P(00)", "P(01)", "P(10)", "P(11)", "P(00|00)", "P(01|00)", "P(10|00)", "P(11|00)", "P(00|01)", "P(01|01)", "P(10|01)", "P(11|01)", "P(00|10)", "P(01|10)", "P(10|10)", "P(11|10)", "P(00|11)", "P(01|11)", "P(10|11)", "P(11|11)"])
 
     fw.to_csv(sys.argv[2])
 

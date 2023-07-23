@@ -4,7 +4,7 @@ mkdir exec
 mkdir result
 mkdir log
 
-gcc -o ./exec/markov_veryfy ./program/markov_model/The_Markov_model.c
+gcc -o ./exec/markov_verify ./program/markov_model/The_Markov_model.c
 gcc -o ./exec/prediction2 ./program/nextbit_prediction/2bit_prediction.c
 gcc -o ./exec/prediction3 ./program/nextbit_prediction/3bit_prediction.c
 gcc -g -o ./exec/markov_csv ./program/t-test/markov_1000.c
@@ -20,8 +20,8 @@ for filename in ./bin_ascii_data/*.txt; do
     mkdir ./result/t-test
     mkdir ./result/chi2test
 
-    echo "./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt"
-    ./exec/markov_veryfy $binfilename ${dirname}/${basefile}_markov.txt > ./log/${basefile}_markov.log
+    echo "./exec/markov_verify $binfilename ${dirname}/${basefile}_markov.txt"
+    ./exec/markov_verify $binfilename ${dirname}/${basefile}_markov.txt > ./log/${basefile}_markov.log
 
     echo "./exec/prediction2 $binfilename ${dirname}/${basefile}_2predict.txt"
     ./exec/prediction2 $binfilename ${dirname}/${basefile}_2predict.txt > ./log/${basefile}_2predict.log
