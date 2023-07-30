@@ -1,8 +1,8 @@
 #!/bin/sh
 
-mkdir exec
-mkdir result
-mkdir log
+mkdir -p exec
+mkdir -p result
+mkdir -p log
 
 gcc -o ./exec/markov_verify ./program/markov_model/The_Markov_model.c
 gcc -o ./exec/prediction2 ./program/nextbit_prediction/2bit_prediction.c

@@ -1,9 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
-mkdir exec
-mkdir bin_ascii_data
-mkdir result
-mkdir log
+if [ -d exec ]; then
+    rm -r exec
+fi
+if [ -d bin_ascii_data ]; then
+    rm -r bin_ascii_data
+fi
+if [ -d result ]; then
+    rm -r result
+fi
+if [ -d log ]; then
+    rm -r log
+fi
+
+mkdir -p exec
+mkdir -p bin_ascii_data
+mkdir -p result
+mkdir -p log
 
 gcc -o ./exec/arrange_data ./program/arrange_data/file_update.c
 gcc -o ./exec/markov_verify ./program/markov_model/The_Markov_model.c
@@ -22,30 +35,34 @@ for filename in ./data/*.txt; do
     mkdir ./result/t-test
     mkdir ./result/chi2test
 
-    echo "./exec/arrange_data $filename $binfilename"
+    echo "> ./exec/arrange_data $filename $binfilename"
     ./exec/arrange_data $filename $binfilename
 
-    echo "./exec/markov_verify $binfilename ${dirname}/${basefile}_markov.txt"
+    echo "> ./exec/markov_verify $binfilename ${dirname}/${basefile}_markov.txt"
     ./exec/markov_verify $binfilename ${dirname}/${basefile}_markov.txt > ./log/${basefile}_markov.log
 
-    echo "./exec/prediction2 $binfilename ${dirname}/${basefile}_2predict.txt"
+    echo "> ./exec/prediction2 $binfilename ${dirname}/${basefile}_2predict.txt"
     ./exec/prediction2 $binfilename ${dirname}/${basefile}_2predict.txt > ./log/${basefile}_2predict.log
 
-    echo "./exec/prediction3 $binfilename ${dirname}/${basefile}_3predict.txt"
+    echo "> ./exec/prediction3 $binfilename ${dirname}/${basefile}_3predict.txt"
     ./exec/prediction3 $binfilename ${dirname}/${basefile}_3predict.txt > ./log/${basefile}_3predict.log
 
-    echo "./exec/markov_csv $binfilename ${dirname}/${basefile}_markov.csv"
+    echo "> ./exec/markov_csv $binfilename ${dirname}/${basefile}_markov.csv"
     ./exec/markov_csv $binfilename ${dirname}/markov_csv/${basefile}_markov > ./log/${basefile}_markov.log
 
+    echo "> python3 ./program/t-test/t-test.py ${dirname}/markov_csv/ ./result/t-test/${basefile}.csv"
     python3 ./program/t-test/t-test.py ${dirname}/markov_csv/ ./result/t-test/${basefile}.csv
 done
 
 # python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv > ./result/t-test/t-test_result.txt
+echo "> python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv"
 python3 ./program/t-test/t-test_result.py ./result/t-test/ ./result/t-test_result.csv
 
 ## fot the testing RO circuit
 mkdir ./result/image
+echo "> python3 ./program/t-test/graph.py ./result/t-test_result.csv ./result/image/"
 python3 ./program/t-test/graph.py ./result/t-test_result.csv ./result/image/
 
 #
+echo "> python3 ./program/t-test/chi2test.py ./result/t-test/ ./result/chi2test/"
 python3 ./program/t-test/chi2test.py ./result/t-test/ ./result/chi2test/

@@ -74,7 +74,8 @@ def main():
         print(f_name)
         fr_data = pd.read_csv(sys.argv[1] + str(f_name), index_col=0, engine="python")
         # 以降修正予定
-        for index, row in fr_data.iteritems():
+        for index, row in fr_data.items():
+        # for index, row in fr_data.iteritems():
             data = Data()
             data.set_index(index)
             for n, d in enumerate(row):

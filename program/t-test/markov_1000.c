@@ -2,12 +2,23 @@
 #include<stdlib.h>
 #include<string.h>
 #include<sysexits.h>
+#include<math.h>
 
 #define BITS 2
 #define SEQUENCE 1000   // 乱数列長
+#define STATE_NUM SEQUENCE/BITS
 #define COUNT 1000      // 必要本数
 #define VERIFY_COUNT SEQUENCE*COUNT
 #define ROUNDMAX 1000   // 検定回数
+
+
+float diviation(int divisible, int divisor){
+    // check the divisor whether the value is 0
+    if (divisor == 0){
+        divisor = INFINITY;
+    }
+    return (float)divisible / divisor;
+}
 
 void main(int argc, char *argv[]){
     FILE *fp1, *fp2;
@@ -97,28 +108,52 @@ void main(int argc, char *argv[]){
 
         if (!(read_count % SEQUENCE)){
             fprintf(fp2, "%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n", 
-                read_count / SEQUENCE,
-                state_total_sub[0] / (float)(SEQUENCE / BITS),
-                state_total_sub[1] / (float)(SEQUENCE / BITS),
-                state_total_sub[2] / (float)(SEQUENCE / BITS),
-                state_total_sub[3] / (float)(SEQUENCE / BITS),
-                state_count_sub[0][0] / (float)state_total_sub[0], 
-                state_count_sub[0][1] / (float)state_total_sub[0], 
-                state_count_sub[0][2] / (float)state_total_sub[0], 
-                state_count_sub[0][3] / (float)state_total_sub[0], 
-                state_count_sub[1][0] / (float)state_total_sub[1], 
-                state_count_sub[1][1] / (float)state_total_sub[1], 
-                state_count_sub[1][2] / (float)state_total_sub[1], 
-                state_count_sub[1][3] / (float)state_total_sub[1], 
-                state_count_sub[2][0] / (float)state_total_sub[2], 
-                state_count_sub[2][1] / (float)state_total_sub[2], 
-                state_count_sub[2][2] / (float)state_total_sub[2], 
-                state_count_sub[2][3] / (float)state_total_sub[2], 
-                state_count_sub[3][0] / (float)state_total_sub[3], 
-                state_count_sub[3][1] / (float)state_total_sub[3], 
-                state_count_sub[3][2] / (float)state_total_sub[3], 
-                state_count_sub[3][3] / (float)state_total_sub[3]               
+                (int)diviation(read_count, SEQUENCE),
+                diviation(state_total_sub[0], STATE_NUM),
+                diviation(state_total_sub[1], STATE_NUM),
+                diviation(state_total_sub[2], STATE_NUM),
+                diviation(state_total_sub[3], STATE_NUM),
+                diviation(state_count_sub[0][0], state_total_sub[0]),
+                diviation(state_count_sub[0][1], state_total_sub[0]),
+                diviation(state_count_sub[0][2], state_total_sub[0]),
+                diviation(state_count_sub[0][3], state_total_sub[0]),
+                diviation(state_count_sub[1][0], state_total_sub[1]),
+                diviation(state_count_sub[1][1], state_total_sub[1]),
+                diviation(state_count_sub[1][2], state_total_sub[1]),
+                diviation(state_count_sub[1][3], state_total_sub[1]),
+                diviation(state_count_sub[2][0], state_total_sub[2]),
+                diviation(state_count_sub[2][1], state_total_sub[2]),
+                diviation(state_count_sub[2][2], state_total_sub[2]),
+                diviation(state_count_sub[2][3], state_total_sub[2]),
+                diviation(state_count_sub[3][0], state_total_sub[3]),
+                diviation(state_count_sub[3][1], state_total_sub[3]),
+                diviation(state_count_sub[3][2], state_total_sub[3]),
+                diviation(state_count_sub[3][3], state_total_sub[3])
             );
+        // if (!(read_count % SEQUENCE)){
+        //     fprintf(fp2, "%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f\n", 
+        //         read_count / SEQUENCE,
+        //         state_total_sub[0] / (float)(SEQUENCE / BITS),
+        //         state_total_sub[1] / (float)(SEQUENCE / BITS),
+        //         state_total_sub[2] / (float)(SEQUENCE / BITS),
+        //         state_total_sub[3] / (float)(SEQUENCE / BITS),
+        //         state_count_sub[0][0] / (float)state_total_sub[0], 
+        //         state_count_sub[0][1] / (float)state_total_sub[0], 
+        //         state_count_sub[0][2] / (float)state_total_sub[0], 
+        //         state_count_sub[0][3] / (float)state_total_sub[0], 
+        //         state_count_sub[1][0] / (float)state_total_sub[1], 
+        //         state_count_sub[1][1] / (float)state_total_sub[1], 
+        //         state_count_sub[1][2] / (float)state_total_sub[1], 
+        //         state_count_sub[1][3] / (float)state_total_sub[1], 
+        //         state_count_sub[2][0] / (float)state_total_sub[2], 
+        //         state_count_sub[2][1] / (float)state_total_sub[2], 
+        //         state_count_sub[2][2] / (float)state_total_sub[2], 
+        //         state_count_sub[2][3] / (float)state_total_sub[2], 
+        //         state_count_sub[3][0] / (float)state_total_sub[3], 
+        //         state_count_sub[3][1] / (float)state_total_sub[3], 
+        //         state_count_sub[3][2] / (float)state_total_sub[3], 
+        //         state_count_sub[3][3] / (float)state_total_sub[3]               
+        //     );
 
             for (j = 0; j < 4; j++){
                 state_count_sub[j][0] = 0;

@@ -46,11 +46,12 @@ def analysis(writedata, csvfilenames):
         # create the label "P(xx)" and "P(xx|yy)"
         db_label_list = []
         for count in range(4):
-            db_label_list.append("P({:02b})".format(c))
+            db_label_list.append("P({:02b})".format(count))
         for count in range(16):
-            count_strbin = "{:04b}".format(c)
-            db_label_list.append("P({}|{}})".format(count_strbin[2:4], count_strbin[0:2]))
+            count_strbin = "{:04b}".format(count)
+            db_label_list.append("P({}|{})".format(count_strbin[2:4], count_strbin[0:2]))
         
+        # print(db_label_list)
         db_list = [DB(label, fr[label].values.tolist()) for label in db_label_list]
         p_val_list = [db.get_p() for db in db_list]
 
